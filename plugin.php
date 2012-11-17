@@ -377,7 +377,7 @@ function geolocation_google_map($divId = 'map', $options = array()) {
  * @param boolean $hasBalloonForMarker
  * @return string
  **/
-function geolocation_google_map_for_item($item = null, $width = '200px', $height = '200px', $hasBalloonForMarker = true, $markerHtmlClassName = 'geolocation_balloon') {  
+function geolocation_google_map_for_item($item = null, $width = '200px', $height = '150px', $hasBalloonForMarker = true, $markerHtmlClassName = 'geolocation_balloon') {  
     if (!$item) {
         $item = get_current_item();
     }      
@@ -412,7 +412,9 @@ function geolocation_google_map_for_item($item = null, $width = '200px', $height
         $center = js_escape($center);
         $options = js_escape($options);
 ?>
-        <div id="<?php echo $divId;?>" style="width:<?php echo $width;?>; height:<?php echo $height;?>;" class="map"></div>
+    <div class="row">
+        <div id="<?php echo $divId;?>" style="height:<?php echo $height;?>;" class="map span6"></div>
+    </div>
         <script type="text/javascript">
         //<![CDATA[
             var <?php echo Inflector::variablize($divId); ?>OmekaMapSingle = new OmekaMapSingle(<?php echo js_escape($divId); ?>, <?php echo $center; ?>, <?php echo $options; ?>);
@@ -552,7 +554,7 @@ function geolocation_public_show_item_map($width = null, $height = null, $item =
     }
     
     if (!$height) {
-        $height = get_option('geolocation_item_map_height') ? get_option('geolocation_item_map_height') : '300px';
+        $height = get_option('geolocation_item_map_height') ? get_option('geolocation_item_map_height') : '200px';
     }
     
     if (!$item) {
@@ -560,11 +562,11 @@ function geolocation_public_show_item_map($width = null, $height = null, $item =
     }
 
     $location = geolocation_get_location_for_item($item, true);
-
+    echo '<hr /><h4><i class="icon-globe icon-large"></i> Geolocation</h4>';
     if ($location) {
-        echo geolocation_scripts()
-           . '<h2>Geolocation</h2>'
-           . geolocation_google_map_for_item();
+        echo geolocation_scripts() . geolocation_google_map_for_item();
+    } else {
+        echo '<p>No location information is recorded for this item.</p>';
     }
 }
 
@@ -677,22 +679,28 @@ function geolocation_append_to_advanced_search($searchFormId = 'advanced-search-
     $ht = '';
     ob_start();
 ?> 
-    <div class="field">
-	    <?php echo label('geolocation-address', 'Geographic Address'); ?>
-	    <div class="inputs">
-	        <?php echo text(array('name'=>'geolocation-address','size' => '40','id'=>'geolocation-address','class'=>'textinput'),$address); ?>
-            <?php echo hidden(array('name'=>'geolocation-latitude','id'=>'geolocation-latitude'),$currentLat); ?>
-            <?php echo hidden(array('name'=>'geolocation-longitude','id'=>'geolocation-longitude'),$currentLng); ?>
-	    </div>
-	</div>
-	
-	<div class="field">
-		<?php echo label('geolocation-radius','Geographic Radius (miles)'); ?>
-		<div class="inputs">
-	        <?php echo text(array('name'=>'geolocation-radius','size' => '40','id'=>'geolocation-radius','class'=>'textinput'),$radius); ?>
-	    </div>
-	</div>
-	
+    <div class="row">
+        <div class="span6">
+            <hr />
+            <div class="row">
+                <div class="span3">
+                    <label for="geolocation-address" class="label">Geographic Address</label>
+                    <div class="inputs">
+                        <?php echo text(array('name'=>'geolocation-address','size' => '40','id'=>'geolocation-address','class'=>'textinput span3'),$address); ?>
+                    <?php echo hidden(array('name'=>'geolocation-latitude','id'=>'geolocation-latitude'),$currentLat); ?>
+                    <?php echo hidden(array('name'=>'geolocation-longitude','id'=>'geolocation-longitude'),$currentLng); ?>
+                    </div>
+                </div>
+
+                <div class="span3">
+                    <label for="geolocation-radius" class="label">Geographic Radius (miles)</label>
+                        <div class="inputs">
+                        <?php echo text(array('name'=>'geolocation-radius','size' => '40','id'=>'geolocation-radius','class'=>'textinput span3'),$radius); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<script type="text/javascript">
 	    jQuery(document).ready(function() {
     	    jQuery('#<?php echo $searchButtonId; ?>').click(function(event) {
