@@ -542,7 +542,7 @@ function geolocation_admin_show_item_map($item)
     if ($location) {
         echo geolocation_scripts()
            . '<div class="info-panel">'
-           . '<h2>Geolocation</h2>'
+           . '<h2>Location</h2>'
            . geolocation_google_map_for_item($item,'224px','270px')
            . '</div>';
     }
@@ -563,7 +563,7 @@ function geolocation_public_show_item_map($width = null, $height = null, $item =
     }
 
     $location = geolocation_get_location_for_item($item, true);
-    echo '<hr /><h4><i class="icon-globe icon-large"></i> Geolocation</h4>';
+    echo '<hr /><h4><i class="icon-globe icon-large"></i> Location</h4>';
     if ($location) {
         echo geolocation_scripts() . geolocation_google_map_for_item();
     } else {
