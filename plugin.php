@@ -447,7 +447,7 @@ function geolocation_get_marker_html_for_item($item, $markerHtmlClassName = 'geo
  * @param int $height
  * @return string
  **/
-function geolocation_map_form($item, $width = '100%', $height = '410px', $label = 'Find a Location by Address:', $confirmLocationChange = true,  $post = null)
+function geolocation_map_form($item, $width = '100%', $height = '200px', $label = 'Find a Location by Address:', $confirmLocationChange = true,  $post = null)
 {
     $ht = '';
 	
@@ -478,14 +478,15 @@ function geolocation_map_form($item, $width = '100%', $height = '410px', $label 
     }
     ob_start();
 ?>
-<div id="location_form">
+<div id="location_form" class="search-form">
     <input type="hidden" name="geolocation[latitude]" value="<?php echo $lat; ?>" />
     <input type="hidden" name="geolocation[longitude]" value="<?php echo $lng; ?>" />
     <input type="hidden" name="geolocation[zoom_level]" value="<?php echo $zoom; ?>" />
     <input type="hidden" name="geolocation[map_type]" value="Google Maps v<?php echo GOOGLE_MAPS_API_VERSION;  ?>" />
-    <label style="display:inline; float:none; vertical-align:baseline;"><?php echo html_escape($label); ?></label>
-    <input type="text" name="geolocation[address]" id="geolocation_address" size="60" value="<?php echo $addr; ?>" class="textinput"/>
-    <button type="button" style="margin-bottom: 18px; float:none;" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address">Find</button>
+    <label style="display:inline; float:none;"><?php echo html_escape($label); ?></label>
+    <button type="button" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address" class="btn pull-right"><i class="icon-map-marker"></i> Mark</button>
+    <input type="text" name="geolocation[address]" id="geolocation_address" size="60" value="<?php echo $addr; ?>" class="search-query pull-right" placeholder="e.g., City, State" />
+    
 </div>
 <?php
     $options = array();
@@ -503,7 +504,7 @@ function geolocation_map_form($item, $width = '100%', $height = '410px', $label 
     $options = js_escape($options);
     $divId = 'omeka-map-form';    
 ?>
-    <div id="<?php echo html_escape($divId); ?>" style="width: <?php echo $width; ?>; height: <?php echo $height; ?>;"></div>
+    <div id="<?php echo html_escape($divId); ?>" style="width: <?php echo $width; ?>; height: <?php echo $height; ?>; margin-top:10px;"></div>
     <script type="text/javascript">
         //<![CDATA[
         var anOmekaMapForm = new OmekaMapForm(<?php echo js_escape($divId); ?>, <?php echo $center; ?>, <?php echo $options; ?>);
@@ -570,11 +571,11 @@ function geolocation_public_show_item_map($width = null, $height = null, $item =
     }
 }
 
-function geolocation_append_contribution_form($contributionType)
+function geolocation_append_contribution_form($contributionType="Item")
 {
     if (get_option('geolocation_add_map_to_contribution_form') == '1') {
         $html = '<div id="geolocation_contribution">'
-              . geolocation_map_form(null, '500px', '410px', 'Find A Geographic Location For The ' . $contributionType->display_name . ':', false)
+              . geolocation_map_form(null, '500px', '200px', 'Find A Geographic Location For The ' . $contributionType->display_name . ':', false)
               . '</div>'
               . '<script type="text/javascript">'
               . 'jQuery("#contribution-type-form").bind("contribution-form-shown", function () {anOmekaMapForm.resize();});'
@@ -582,6 +583,8 @@ function geolocation_append_contribution_form($contributionType)
         echo $html;
     }
 }
+
+
 
 function geolocation_save_contribution_form($contributionType, $item, $post)
 {
@@ -736,3 +739,17 @@ function geolocation_append_to_advanced_search($searchFormId = 'advanced-search-
     ob_end_clean();
     return $ht;
 }
+
+function geolocation_append_crowded_form($item) {
+    
+    
+    $html = '<div id="geolocation_form"><i class="icon-globe"></i> Location'
+          . geolocation_map_form($item, '100%', '150px', 'Enter Location and Press Mark', false)
+          . '</div>'
+          . '<script type="text/javascript">'
+          . 'jQuery("#contribution-type-form").bind("contribution-form-shown", function () {anOmekaMapForm.resize();});'
+          . '</script>';
+    echo $html;
+}
+
+
