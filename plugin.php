@@ -484,8 +484,8 @@ function geolocation_map_form($item, $width = '100%', $height = '200px', $label 
     <input type="hidden" name="geolocation[zoom_level]" value="<?php echo $zoom; ?>" />
     <input type="hidden" name="geolocation[map_type]" value="Google Maps v<?php echo GOOGLE_MAPS_API_VERSION;  ?>" />
     <label style="display:inline; float:none;"><?php echo html_escape($label); ?></label>
-    <button type="button" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address" class="btn btn-info pull-right"><i class="icon-map-marker"></i> Mark</button>
-    <input type="text" name="geolocation[address]" id="geolocation_address" size="60" value="<?php echo $addr; ?>" class="search-query pull-right" placeholder="e.g., City, State" />
+    <button type="button" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address" class="btn btn-success pull-right"><i class="icon-map-marker"></i> Mark</button>
+    <input type="text" name="geolocation[address]" id="geolocation_address" size="60" value="<?php echo $addr; ?>" class="pull-right" placeholder="e.g., City, State" />
     
 </div>
 <?php
