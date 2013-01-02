@@ -226,7 +226,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
                             && $controller == 'contribution' 
                             && $action == 'contribute' 
                             && get_option('geolocation_add_map_to_contribution_form') == '1')
-                         || ($controller == 'items') )  {
+                         || ($controller == 'items'))  {
             queue_css_file('geolocation-items-map');
             queue_css_file('geolocation-marker');
             queue_js_url("http://maps.google.com/maps/api/js?sensor=false");
@@ -243,8 +243,8 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
         if ($location) {
             $width = get_option('geolocation_item_map_width') ? get_option('geolocation_item_map_width') : '100%';
             $height = get_option('geolocation_item_map_height') ? get_option('geolocation_item_map_height') : '300px';            
-            $html = "<div id='geolocation'>";
-            $html .= '<h2>Geolocation</h2>';
+            $html = "<hr /><div id='geolocation'>";
+            $html .= '<h4><i class="icon-globe icon-large"></i> Geolocation</h4>';
             $html .= $view->itemGoogleMap($item, $width, $height);
             $html .= "</div>";
             echo $html;
@@ -347,6 +347,11 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
         return $navArray;        
     }     
     
+    // Below added for CrowdEd -- there's prolly a better way to do this, but I need this to work now - gsb
+    public function displayMapForm($item) {
+        $html = $this->_mapForm($item,$label='Enter a location and press Mark');
+        return $html;
+    }
 
     /**
      * Returns the form code for geographically searching for items
