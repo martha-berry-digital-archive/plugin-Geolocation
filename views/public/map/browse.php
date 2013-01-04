@@ -28,10 +28,10 @@ echo head(array('title' => __('Browse Map'),'bodyid'=>'map','bodyclass' => 'brow
 
 <div id="primary">
 
-<h1>Browse Items on the Map (<?php echo $totalItems; ?> total)</h1>
+    <h1><i class="icon-globe"></i> Browse Items <small>on the map (<?php echo $totalItems; ?> total)</small></h1>
 
 <nav class="items-nav navigation" id="secondary-nav">
-    <?php echo public_nav_items(); ?>
+    <?php echo public_nav_items()->setUlClass('nav nav-pills'); ?>
 </nav>
 
 <div class="pagination">
