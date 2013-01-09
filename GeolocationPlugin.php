@@ -244,7 +244,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             $width = get_option('geolocation_item_map_width') ? get_option('geolocation_item_map_width') : '100%';
             $height = get_option('geolocation_item_map_height') ? get_option('geolocation_item_map_height') : '300px';            
             $html = "<hr /><div id='geolocation'>";
-            $html .= '<h4><i class="icon-globe icon-large"></i> Geolocation</h4>';
+            $html .= '<h4><i class="icon-globe icon-large"></i> Location</h4>';
             $html .= $view->itemGoogleMap($item, $width, $height);
             $html .= "</div>";
             echo $html;
@@ -349,7 +349,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
     
     // Below added for CrowdEd -- there's prolly a better way to do this, but I need this to work now - gsb
     public function displayMapForm($item) {
-        $html = $this->_mapForm($item,$label='Enter a location and press Mark');
+        $html = $this->_mapForm($item,$label='Enter a location and press the Mark button');
         return $html;
     }
 
@@ -400,8 +400,8 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
         $html .=     '</div>';
         $html .=     '<div class="inputs five columns omega">';
         $html .=          '<div class="input-block">';
-        $html .=            '<input type="text" name="geolocation[address]" id="geolocation_address" value="' . $addr . '" class="textinput"/>';
-        $html .=            '<button type="button" style="margin-bottom: 18px; float:none;" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address">Find</button>';        
+        $html .=            '<input type="text" name="geolocation[address]" id="geolocation_address" value="' . $addr . '" class="textinput span5"/>';
+        $html .=            '<button type="button" class="btn btn-success pull-right" name="geolocation_find_location_by_address" id="geolocation_find_location_by_address"><i class="icon-map-marker"></i> Mark</button>';        
         $html .=          '</div>';
         $html .=     '</div>';
         $html .= '</div>';
