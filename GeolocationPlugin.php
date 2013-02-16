@@ -244,7 +244,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
             $width = get_option('geolocation_item_map_width') ? get_option('geolocation_item_map_width') : '100%';
             $height = get_option('geolocation_item_map_height') ? get_option('geolocation_item_map_height') : '300px';            
             $html = "<hr /><div id='geolocation'>";
-            $html .= '<h4><i class="icon-globe icon-large"></i> Location</h4>';
+            $html .= '<h4><i class="icon-globe"></i> Location</h4>';
             $html .= $view->itemGoogleMap($item, $width, $height);
             $html .= "</div>";
             echo $html;
