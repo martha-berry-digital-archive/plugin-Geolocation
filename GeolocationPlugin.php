@@ -397,7 +397,7 @@ class GeolocationPlugin extends Omeka_Plugin_AbstractPlugin
         $html .=         '<input type="hidden" name="geolocation[zoom_level]" value="' . $zoom . '" />';
         $html .=         '<input type="hidden" name="geolocation[map_type]" value="Google Maps v' . GOOGLE_MAPS_API_VERSION . '" />';
         $html .=         '<i class="icon-globe"></i> <label style="display:inline;" for="omeka-map-form">Location</label> ';
-        $html .=         ' <a class="helpText" href="#" rel="tooltip" title="Where was this document composed? Enter the city and state (or as much as you can) identifying the item&rsquo;s origin." data-placement="right"><i class="icon-question-sign"></i></a>';
+        $html .=         ' <a class="helpText" href="#" rel="tooltip" title="<p>Where was this document sent from?</p><p>We&rsquo;re interested in the location of the author. If it is provided, enter it using the format <em>City, State or City, Country</em></p>" data-placement="right"><i class="icon-question-sign"></i></a>';
         $html .=     '</div>';
         $html .=     '<div class="inputs">';
         $html .=          '<div class="input-block">';
